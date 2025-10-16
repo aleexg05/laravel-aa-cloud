@@ -1,66 +1,93 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="antialiased bg-gradient-to-br from-neutral-50 via-white to-neutral-100 dark:from-neutral-900 dark:via-neutral-950 dark:to-black text-neutral-800 dark:text-neutral-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- Navbar --}}
-    <header class="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-neutral-800">
-        <h1 class="text-xl font-semibold tracking-tight">{{ config('app.name', 'Laravel') }}</h1>
-        <nav class="space-x-4 text-sm font-medium">
-            <a href="{{ url('/') }}" class="hover:text-blue-600 dark:hover:text-blue-400">Inici</a>
-            <a href="{{ route('login') }}" class="hover:text-blue-600 dark:hover:text-blue-400">Accedir</a>
-            <a href="{{ route('register') }}" class="rounded-md bg-blue-600 px-3 py-2 text-white hover:bg-blue-500 transition-colors">Registrar-se</a>
-        </nav>
-    </header>
+        <title>Laravel</title>
 
-    {{-- Hero section --}}
-    <section class="flex flex-col items-center justify-center px-6 py-24 text-center">
-        <h2 class="text-5xl font-bold tracking-tight mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            Benvingut a {{ config('app.name', 'Laravel') }}
-        </h2>
-        <p class="max-w-xl text-lg text-neutral-600 dark:text-neutral-400 mb-8">
-            Una aplicació moderna, segura i ràpida, desenvolupada amb Laravel i desplegada amb CI/CD automàtic.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-            <a href="{{ route('register') }}" class="rounded-md bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-500 transition-all shadow-sm hover:shadow-md">
-                Comença ara
-            </a>
-            <a href="{{ route('login') }}" class="rounded-md border border-blue-600 px-6 py-3 text-blue-600 font-medium hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all">
-                Ja tens compte?
-            </a>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Styles / Scripts -->
+        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @else
+
+        
+        @endif
+
+        <style>
+         img{
+                    height:250px;
+                    width: 250px;
+         }h1{
+            font-size:40px;
+            text-align:center;
+            margin-top:-230px
+         
+         }p{
+            font-size:20px
+         }
+    </style>
+    </head>
+    
+    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+          
+            <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
+            <h1> APP DE RESERVES D'ESDEVENIMENTS</h1>
+            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
+                  
+                    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
+                        <div class="flex lg:justify-center lg:col-start-2">
+                        <img src="{{ asset('images/laravel.jpg') }}" >
+</div>
+                        @if (Route::has('login'))
+                            <nav class="-mx-3 flex flex-1 justify-end">
+                                @auth
+                                    <a
+                                        href="{{ url('/dashboard') }}"
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    >
+                                        Dashboard
+                                    </a>
+                                @else
+                                    <a
+                                        href="{{ route('login') }}"
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    >
+                                        Log in
+                                    </a>
+
+                                    @if (Route::has('register'))
+                                        <a
+                                            href="{{ route('register') }}"
+                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        >
+                                            Register
+                                        </a>
+                                    @endif
+                                @endauth
+                                
+                            </nav>
+                          
+                        @endif
+                       
+                    </header>
+                    <p>Amb aquesta pàgina web de laravel podràs veure els diferents esdeveniments que hi 
+                        ha agrupats per les diferents categories i realitar reserves dels teus esdeveniments preferits!!
+                           .
+                            </p>
+
+                   
+
+                          
+
+                   
+                </div>
+            </div>
         </div>
-    </section>
-
-    {{-- Feature grid --}}
-    <section class="px-6 py-16 border-t border-neutral-200 dark:border-neutral-800">
-        <div class="max-w-5xl mx-auto grid gap-10 sm:grid-cols-3 text-center">
-            <div>
-                <div class="text-4xl mb-3">⚡</div>
-                <h3 class="font-semibold mb-2 text-lg">Ràpid i modern</h3>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400">Laravel + Tailwind per oferir una experiència fluïda i elegant.</p>
-            </div>
-            <div>
-                <div class="text-4xl mb-3">🔒</div>
-                <h3 class="font-semibold mb-2 text-lg">Segur per disseny</h3>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400">Protecció CSRF, validació automàtica i bones pràctiques per defecte.</p>
-            </div>
-            <div>
-                <div class="text-4xl mb-3">🚀</div>
-                <h3 class="font-semibold mb-2 text-lg">CI/CD integrat</h3>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400">Cada commit es prova i desplega automàticament a Laravel Cloud.</p>
-            </div>
-        </div>
-    </section>
-
-    {{-- Footer --}}
-    <footer class="py-8 text-center text-sm text-neutral-500 dark:text-neutral-500 border-t border-neutral-200 dark:border-neutral-800">
-        <p>&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }} · Fet amb ❤️ amb Laravel</p>
-    </footer>
-
-</body>
+    </body>
 </html>

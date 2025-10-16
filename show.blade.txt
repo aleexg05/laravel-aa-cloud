@@ -1,0 +1,59 @@
+@extends('layouts.master')
+
+@section('title', 'Vista detall Esdeveniment')
+
+@section('content')
+<!-- @if ($esdeveniment-> reserves < $esdeveniment-> num_max_assistents) -->
+<div class="row">
+    <div class="col-sm-4">
+       
+        <img src="{{ $esdeveniment->imatge }}" alt="Imagen de evento">
+    </div>
+    
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .btn-warning {
+            color: white;
+        }
+        .btn-default {
+            border: solid 1px grey;
+            color: black;
+        }
+    </style>
+
+    <div class="col-sm-8">
+        <h1>Titol: {{ $esdeveniment->nom }}</h1>
+        <br>
+        <h2>Data: {{ $esdeveniment->data }}</h2>
+        <br>
+        <h2>Hora: {{ $esdeveniment->hora }}</h2>
+        <br>
+        <p>Descripció: {{ $esdeveniment->descripcio }}</p>
+        <br>
+        <p>Edat mínima: {{ $esdeveniment->edat_minima }}</p>
+        <br>
+        <!-- <p>Places disponibles: {{ ($esdeveniment->num_max_assistents - $esdeveniment->usuaris->count() )}}</p> -->
+
+        <!-- @if ($esdeveniment->usuaris->count() < $esdeveniment-> num_max_assistents)
+            <p>Esdeveniment disponible</p>
+            <a href="{{ route('esdeveniments.reserva') }}" type="button" class="btn btn-success" disabled>Reserva plaça</a>
+             -->
+        <!-- @else -->
+            <p>Les places estan esgotades</p>
+            <a href="{{ route('esdeveniments.reserva') }}" type="button" class="btn btn-secondary" disabled>No disponible</a>
+        <!-- @endif -->
+
+      
+        <a href="{{ route('esdeveniments') }}" class="btn btn-default">Tornar al llistat</a>
+    </div>
+
+</div>
+<!-- @else -->
+<!-- <?php
+// echo(" ");
+?> -->
+<!-- @endif -->
+@stop
